@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kapil Kashyap - Web Developer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+            color: #e2e8f0;
+            line-height: 1.6;
+            scroll-behavior: smooth;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        #background-effect {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.05;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.3) 0%, transparent 70%);
+        }
+
+        /* Navigation Bar */
+        nav {
+            background: rgba(15, 23, 43, 0.95);
+            padding: 20px 60px;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .nav-brand {
+            font-size: 24px;
+            font-weight: 700;
+            color: #3b82f6;
+            transition: color 0.3s ease;
+        }
+
+        .nav-brand:hover {
+            color: #60a5fa;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        nav ul li {
+            position: relative;
+        }
+
+        nav ul li a {
+            color: #e2e8f0;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            display: block;
+        }
+
+        nav ul li a:hover {
+            background: #3b82f6;
+            color: white;
+        }
+
+        /* Dropdown Menu */
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            background: rgba(15, 23, 43, 0.98);
+            min-width: 200px;
+            top: 100%;
+            left: 0;
+            border-radius: 8px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .dropdown:hover .dropdown-menu {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .dropdown-menu li {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .dropdown-menu li:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-menu li a {
+            padding: 12px 20px;
+            font-weight: 400;
+            border-radius: 0;
+        }
+
+        .dropdown-menu li a:hover {
+            background: #2563eb;
+            color: white;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            min-height: 100vh;
+            padding: 0 80px;
+            margin-top: 80px;
+        }
+
+        .text-content {
+            max-width: 50%;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 15px;
+            border: 1px solid rgba(59, 130, 246, 0.1);
+        }
+
+        .greeting {
+            font-size: 28px;
+            color: #93c5fd;
+            margin-bottom: 10px;
+            animation: fadeIn 1s ease-out;
+        }
+
+        .name {
+            font-size: 60px;
+            font-weight: 700;
+            color: #3b82f6;
+            margin-bottom: 15px;
+            animation: fadeIn 1.2s ease-out;
+        }
+
+        .title {
+            font-size: 32px;
+            color: #e2e8f0;
+            margin-bottom: 25px;
+            animation: fadeIn 1.4s ease-out;
+        }
+
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: #3b82f6;
+            color: white;
+            padding: 12px 30px;
+            font-size: 18px;
+            font-weight: 500;
+            border: none;
+            border-radius: 30px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+        }
+
+        .cta-button:hover {
+            background: #2563eb;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(59, 130, 246, 0.5);
+        }
+
+        .profile-image {
+            width: 400px;
+            height: 400px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 6px solid #3b82f6;
+            box-shadow: 0 0 30px rgba(59, 130, 246, 0.2);
+            transition: all 0.3s ease;
+           
+        }
+
+        .profile-image:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 40px rgba(59, 130, 246, 0.4);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            nav {
+                padding: 15px 20px;
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: 10px;
+                width: 100%;
+                text-align: center;
+            }
+
+            .dropdown-menu {
+                position: relative;
+                width: 100%;
+                top: 0;
+                left: 0;
+                box-shadow: none;
+            }
+
+            .hero-section {
+                flex-direction: column;
+                padding: 100px 20px;
+                text-align: center;
+            }
+
+            .text-content {
+                max-width: 100%;
+                padding: 20px;
+            }
+
+            .profile-image {
+                width: 200px;
+                height: 200px;
+                margin-top: 30px;
+            }
+
+            .name { font-size: 40px; }
+            .title { font-size: 24px; }
+            .greeting { font-size: 20px; }
+        }
+    </style>
+</head>
+<body>
+    <div id="background-effect"></div>
+    
+    <nav>
+        <div class="nav-brand">Kapil Kashyap</div>
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li class="dropdown">
+                <a href="#" id="projects-btn">Projects ▼</a>
+                <ul class="dropdown-menu" id="projects-list">
+                    <li><a href="https://kapildev-dot.github.io/canteen/">Canteen</a></li>
+                    <li><a href="https://kapildev-dot.github.io/registrationform/">Registration Form</a></li>
+                </ul>
+            </li>
+            <li><a href="#certifications">Certifications</a></li>
+            <li><a href="https://kapildev-dot.github.io/hb/">Hobbies</a></li>
+            <li><a href="https://kapildev-dot.github.io/resume/" target="_blank">Resume</a></li>
+        </ul>
+    </nav>
+
+    <section class="hero-section" id="home">
+        <div class="text-content">
+            <p class="greeting">Hello, I'm</p>
+            <h1 class="name">Kapil Kashyap</h1>
+            <p class="title">Web Developer & Designer</p>
+            <a href="r1.pdf" class="cta-button" download="Kapil_Kashyap_CV.pdf">Download CV</a>
+        </div>
+        <img src="profile.png" alt="Kapil Kashyap" class="profile-image">
+    </section>
+
+    <script>
+        // Dropdown and smooth scrolling functionality
+        document.addEventListener("DOMContentLoaded", function () {
+            const projectsBtn = document.getElementById("projects-btn");
+            const projectsList = document.getElementById("projects-list");
+
+            // Toggle dropdown on click
+            projectsBtn.addEventListener("click", function (event) {
+                event.preventDefault();
+                const isDisplayed = projectsList.style.display === "block";
+                projectsList.style.display = isDisplayed ? "none" : "block";
+            });
+
+            // Close dropdown when clicking outside
+            document.addEventListener("click", function (event) {
+                if (!projectsBtn.contains(event.target) && !projectsList.contains(event.target)) {
+                    projectsList.style.display = "none";
+                }
+            });
+
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>
